@@ -1,0 +1,28 @@
+﻿@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Extensions;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@using MyDockerSqliteProject.Models;
+@{
+    Layout = "master.cshtml";
+    var paginaModel = (Pagina)Model; 
+    ViewData["Title"] = Model.Value<string>("titulo");
+}
+<section>
+    <h2>@(Model.Value<string>("titulo"))</h2>
+    <div>
+        <figure>
+            @{
+                var imagen = Model.Value<IPublishedContent>("imagen");
+            }
+            @if (imagen != null)
+            {
+                <img src="@imagen.Url()" alt="Imagen 1" />
+            }
+        </figure>
+    </div>
+    <article>
+        @paginaModel.
+        @Html.Raw(Model.Value<string>("parrafo"))
+    </article>
+</section>

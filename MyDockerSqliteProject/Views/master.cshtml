@@ -1,0 +1,31 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - My Umbraco Site</title>
+</head>
+<body>
+    <header>
+        <h1>Site Header</h1>
+        <nav>
+            <!-- navegación básica -->
+            <a href="/">Home</a> |
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My Umbraco Site</p>
+    </footer>
+</body>
+</html>

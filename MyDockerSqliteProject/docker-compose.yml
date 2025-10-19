@@ -1,0 +1,16 @@
+services:
+  umbraco:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    working_dir: /app
+    command: bash -c "dotnet restore && dotnet watch run --urls=http://+:8080"
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
+    volumes:
+      - .:/app
+      - nuget-packages:/root/.nuget/packages
+
+volumes:
+  nuget-packages:

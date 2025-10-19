@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDockerSqliteProject", "MyDockerSqliteProject.csproj", "{B27B4D1E-7BF8-DA6B-A084-8249AC225FCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B27B4D1E-7BF8-DA6B-A084-8249AC225FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27B4D1E-7BF8-DA6B-A084-8249AC225FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27B4D1E-7BF8-DA6B-A084-8249AC225FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27B4D1E-7BF8-DA6B-A084-8249AC225FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {384DC2BF-90E9-4437-A71C-743D6C6BC137}
+	EndGlobalSection
+EndGlobal
