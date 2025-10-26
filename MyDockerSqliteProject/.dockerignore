@@ -1,0 +1,14 @@
+bin/
+obj/
+umbraco/Data/Umbraco.sqlite.db*
+umbraco/Data/TEMP/
+umbraco/Logs/
+.git/
+.gitignore
+.cursor/
+.vscode/
+.idea/
+node_modules/
+**/*.user
+**/*.suo
+**/*.DS_Store

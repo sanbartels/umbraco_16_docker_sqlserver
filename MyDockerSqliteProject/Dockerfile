@@ -6,14 +6,16 @@ ENV ASPNETCORE_URLS=http://+:8080
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["MyDockerSqliteProject.csproj", "./"]
-RUN dotnet restore "MyDockerSqliteProject.csproj"
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    DOTNET_NOLOGO=1
 COPY . .
-WORKDIR "/src"
-RUN dotnet build "MyDockerSqliteProject.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet --info \
+ && dotnet restore "MyDockerSqliteProject.csproj" -v minimal \
+ && dotnet build "MyDockerSqliteProject.csproj" -c $BUILD_CONFIGURATION -v minimal --no-restore
 
 FROM build AS publish
-RUN dotnet publish "MyDockerSqliteProject.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+WORKDIR /src
+RUN dotnet publish "MyDockerSqliteProject.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false -v minimal --no-restore
 
 FROM base AS final
 WORKDIR /app
