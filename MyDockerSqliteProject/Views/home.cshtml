@@ -2,10 +2,10 @@
 @using Umbraco.Extensions;
 @using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
-@using MyDockerSqliteProject.Models;
+
 @{
     Layout = "master.cshtml";
-    var paginaModel = (Pagina)Model; 
+    var paginaModel = (Pagina)Model;
     ViewData["Title"] = Model.Value<string>("titulo");
 }
 <section>
@@ -22,7 +22,7 @@
         </figure>
     </div>
     <article>
-        @paginaModel.
+        @paginaModel.Parrafo
         @Html.Raw(Model.Value<string>("parrafo"))
     </article>
 </section>
