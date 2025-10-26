@@ -8,9 +8,11 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
             - ASPNETCORE_URLS=http://+:8080
+            - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
             - Umbraco__CMS__Unattended__InstallUnattended=true
             - Umbraco__CMS__Unattended__PackageMigrationsUnattended=true
             - Umbraco__CMS__Unattended__UpgradeUnattended=true
+            - Umbraco__CMS__WebRouting__UmbracoApplicationUrl=${PUBLIC_URL:-http://lsoco8cokk8k8cowks8wog8w.147.93.6.245.sslip.io}
         volumes:
             - umbraco-data:/app/umbraco/Data
             - media:/app/wwwroot/media

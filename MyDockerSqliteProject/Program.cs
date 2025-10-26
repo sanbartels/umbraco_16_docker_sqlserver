@@ -5,9 +5,12 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Configure forwarded headers for reverse proxy (Coolify)
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                               ForwardedHeaders.XForwardedProto |
+                               ForwardedHeaders.XForwardedHost;
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
+    options.ForwardLimit = null; // Allow any number of proxies
 });
 
 builder.CreateUmbracoBuilder()
