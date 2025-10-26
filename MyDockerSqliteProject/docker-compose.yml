@@ -6,9 +6,10 @@ services:
         expose:
             - 8080
         environment:
-            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:8080
             - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+            - ASPNETCORE_HTTPS_PORT=443
             - Umbraco__CMS__Unattended__InstallUnattended=true
             - Umbraco__CMS__Unattended__PackageMigrationsUnattended=true
             - Umbraco__CMS__Unattended__UpgradeUnattended=true
