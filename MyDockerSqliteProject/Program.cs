@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.HttpOverrides;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Configure forwarded headers for reverse proxy (Coolify)
-builder.Services.Configure<Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersOptions>(options =>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor |
-                               Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
 });
@@ -17,10 +18,10 @@ builder.CreateUmbracoBuilder()
 
 WebApplication app = builder.Build();
 
-await app.BootUmbracoAsync();
-
-// Enable forwarded headers when running behind a reverse proxy (e.g., Coolify's proxy)
+// Enable forwarded headers BEFORE other middleware (required for reverse proxy like Coolify)
 app.UseForwardedHeaders();
+
+await app.BootUmbracoAsync();
 
 
 app.UseUmbraco()
