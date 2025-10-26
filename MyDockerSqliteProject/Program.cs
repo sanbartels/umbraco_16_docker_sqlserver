@@ -11,7 +11,18 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
     options.ForwardLimit = null; // Allow any number of proxies
+    options.RequireHeaderSymmetry = false;
 });
+
+// Get the public URL from environment or configuration
+var publicUrl = builder.Configuration["Umbraco:CMS:WebRouting:UmbracoApplicationUrl"]
+                ?? Environment.GetEnvironmentVariable("Umbraco__CMS__WebRouting__UmbracoApplicationUrl")
+                ?? "http://localhost:8080";
+
+// Log startup information
+Console.WriteLine("========================================");
+Console.WriteLine($"Umbraco Public URL: {publicUrl}");
+Console.WriteLine("========================================");
 
 builder.CreateUmbracoBuilder()
     .AddBackOffice()
