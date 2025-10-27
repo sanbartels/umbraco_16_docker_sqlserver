@@ -1,0 +1,32 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Ensure shell scripts always have LF line endings (Unix style)
+*.sh text eol=lf
+
+# Dockerfile should have LF
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+
+# C# files
+*.cs text diff=csharp
+*.csproj text
+*.sln text
+
+# Web files
+*.cshtml text
+*.json text
+*.js text
+*.css text
+*.html text
+
+# Binary files
+*.db binary
+*.dll binary
+*.exe binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary
