@@ -19,9 +19,15 @@ var publicUrl = builder.Configuration["Umbraco:CMS:WebRouting:UmbracoApplication
                 ?? Environment.GetEnvironmentVariable("Umbraco__CMS__WebRouting__UmbracoApplicationUrl")
                 ?? "http://localhost:8080";
 
+var backOfficeHost = builder.Configuration["Umbraco:CMS:Security:BackOfficeHost"]
+                     ?? Environment.GetEnvironmentVariable("Umbraco__CMS__Security__BackOfficeHost")
+                     ?? publicUrl;
+
 // Log startup information
 Console.WriteLine("========================================");
 Console.WriteLine($"Umbraco Public URL: {publicUrl}");
+Console.WriteLine($"BackOffice Host: {backOfficeHost}");
+Console.WriteLine($"Environment: {builder.Environment.EnvironmentName}");
 Console.WriteLine("========================================");
 
 builder.CreateUmbracoBuilder()

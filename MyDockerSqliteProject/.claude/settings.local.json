@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:documentation.openiddict.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.umbraco.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
