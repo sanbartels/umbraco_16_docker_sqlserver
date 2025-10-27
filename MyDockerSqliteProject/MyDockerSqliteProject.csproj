@@ -31,9 +31,4 @@
         <RazorCompileOnPublish>false</RazorCompileOnPublish>
     </PropertyGroup>
 
-    <ItemGroup>
-        <!-- Ensure all Views are copied to publish directory -->
-        <Content Include="Views/**/*.cshtml" CopyToPublishDirectory="PreserveNewest" />
-    </ItemGroup>
-
 </Project>
