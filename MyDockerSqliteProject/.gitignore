@@ -475,3 +475,12 @@ umbraco-package-schema.json
 
 # Media files
 /wwwroot/media/
+
+# SQLite database - Ignore local development database
+/umbraco/Data/*.db
+/umbraco/Data/*.db-shm
+/umbraco/Data/*.db-wal
+
+# IMPORTANT: DO NOT ignore seed-db/ - this is the seed database for Docker
+# seed-db/ should be versioned in git
+# !seed-db/

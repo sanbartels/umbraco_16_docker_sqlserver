@@ -20,4 +20,11 @@ RUN dotnet publish "MyDockerSqliteProject.csproj" -c $BUILD_CONFIGURATION -o /ap
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MyDockerSqliteProject.dll"]
+
+# Copiar script de inicialización y base de datos seed
+COPY init-db.sh /app/init-db.sh
+COPY seed-db/ /app/seed-db/
+RUN chmod +x /app/init-db.sh
+
+# Usar script de inicialización como entrypoint
+ENTRYPOINT ["/app/init-db.sh"]

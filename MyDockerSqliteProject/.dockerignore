@@ -3,6 +3,8 @@ obj/
 umbraco/Data/Umbraco.sqlite.db*
 umbraco/Data/TEMP/
 umbraco/Logs/
+# Permitir seed-db para inicialización
+!seed-db/
 .git/
 .gitignore
 .cursor/

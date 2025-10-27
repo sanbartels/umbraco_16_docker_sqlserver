@@ -53,6 +53,54 @@ El proyecto está configurado con:
     - El error de OAuth debería estar resuelto
     - Si es la primera vez, completa la instalación de Umbraco
 
+## 💾 Persistencia de Datos y Base de Datos Seed
+
+### Cómo Funciona la Persistencia
+
+El proyecto usa un **sistema de base de datos seed** para mantener tus datos entre despliegues:
+
+1. **Primera vez que despliegas**:
+   - El script `init-db.sh` verifica si existe una base de datos en el volumen de Coolify
+   - Si NO existe, copia la base de datos seed desde `/app/seed-db/Umbraco.sqlite.db`
+   - Tu contenido, usuarios, y configuración se preservan
+
+2. **Despliegues posteriores**:
+   - El volumen de Coolify (`umbraco-data`) mantiene tu base de datos
+   - El script detecta que ya existe y la usa
+   - NO se sobrescribe con la seed database
+
+### Actualizar la Base de Datos Seed
+
+Si haces cambios importantes en tu Umbraco local (nuevos content types, usuarios, etc.) y quieres que se incluyan en el próximo despliegue:
+
+```bash
+# 1. Copia tu base de datos actual a seed-db
+cp umbraco/Data/Umbraco.sqlite.db seed-db/Umbraco.sqlite.db
+
+# 2. Haz commit y push
+git add seed-db/Umbraco.sqlite.db
+git commit -m "feat: actualizar base de datos seed con nuevos cambios"
+git push
+
+# 3. En Coolify:
+#    - Elimina el volumen umbraco-data (si quieres empezar de cero)
+#    - Re-despliega la aplicación
+#    - La nueva seed database se copiará
+```
+
+### ⚠️ Importante: Volúmenes en Coolify
+
+- **umbraco-data**: Persiste tu base de datos SQLite entre despliegues
+- **media**: Persiste archivos de media subidos en Umbraco
+- Si eliminas estos volúmenes, perderás tus datos (a menos que tengas un backup de la seed database)
+
+### Views y Archivos de Código
+
+Las **Views** (`Views/*.cshtml`) se incluyen en la imagen Docker automáticamente:
+- Se copian durante el build con `dotnet publish`
+- Están configuradas en el `.csproj` con `CopyToPublishDirectory="PreserveNewest"`
+- NO necesitas volúmenes para las Views, se actualizan en cada despliegue
+
 ## ⚙️ Configuración Adicional
 
 ### Dominio Personalizado

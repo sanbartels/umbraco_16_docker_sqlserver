@@ -4,7 +4,10 @@
       "WebSearch",
       "WebFetch(domain:documentation.openiddict.com)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:docs.umbraco.com)"
+      "WebFetch(domain:docs.umbraco.com)",
+      "Read(//Users/santiago/Documents/**)",
+      "Bash(cd:*)",
+      "Bash(chmod:*)"
     ],
     "deny": [],
     "ask": []
