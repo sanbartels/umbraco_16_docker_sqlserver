@@ -13,8 +13,8 @@ services:
             - Umbraco__CMS__Unattended__InstallUnattended=true
             - Umbraco__CMS__Unattended__PackageMigrationsUnattended=true
             - Umbraco__CMS__Unattended__UpgradeUnattended=true
-            - Umbraco__CMS__WebRouting__UmbracoApplicationUrl=${PUBLIC_URL:-https://lsoco8cokk8k8cowks8wog8w.147.93.6.245.sslip.io}
-            - Umbraco__CMS__Security__BackOfficeHost=${PUBLIC_URL:-https://lsoco8cokk8k8cowks8wog8w.147.93.6.245.sslip.io}
+            - Umbraco__CMS__WebRouting__UmbracoApplicationUrl=${PUBLIC_URL:-http://localhost:8080}
+            - Umbraco__CMS__Security__BackOfficeHost=${PUBLIC_URL:-http://localhost:8080}
         volumes:
             - umbraco-data:/app/umbraco/Data
             - media:/app/wwwroot/media
