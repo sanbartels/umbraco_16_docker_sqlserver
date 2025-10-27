@@ -1,0 +1,7 @@
+# Este archivo se usa automáticamente en desarrollo local
+# Coolify NO lo usa, solo usa docker-compose.yml
+
+services:
+  umbraco:
+    ports:
+      - "8080:8080"
