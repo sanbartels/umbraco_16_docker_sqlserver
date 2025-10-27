@@ -484,3 +484,6 @@ umbraco-package-schema.json
 # IMPORTANT: DO NOT ignore seed-db/ - this is the seed database for Docker
 # seed-db/ should be versioned in git
 # !seed-db/
+
+# Docker Compose override for local development only
+docker-compose.override.yml
