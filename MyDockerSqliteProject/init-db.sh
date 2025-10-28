@@ -15,10 +15,26 @@ echo "========================================"
 # Crear directorio si no existe
 mkdir -p /app/umbraco/Data
 
+# Debug: mostrar contenido del directorio Data
+echo "📂 Contenido de /app/umbraco/Data:"
+ls -lah /app/umbraco/Data/ || echo "   (directorio vacío)"
+
+# Debug: verificar si existe seed database
+echo ""
+echo "🔍 Verificando seed database:"
+if [ -f "$SEED_DB_PATH" ]; then
+    echo "   ✅ Seed DB encontrada: $SEED_DB_PATH"
+    ls -lh "$SEED_DB_PATH"
+else
+    echo "   ❌ No se encontró seed database en: $SEED_DB_PATH"
+fi
+
+echo ""
 # Verificar si la base de datos ya existe
 if [ -f "$DB_PATH" ]; then
     echo "✅ Base de datos existente encontrada: $DB_PATH"
-    echo "   Usando base de datos actual"
+    ls -lh "$DB_PATH"
+    echo "   Usando base de datos actual (no se sobrescribe)"
 else
     echo "⚠️  Base de datos no encontrada en: $DB_PATH"
 
@@ -27,6 +43,7 @@ else
         echo "📦 Copiando base de datos seed..."
         cp "$SEED_DB_PATH" "$DB_PATH"
         echo "✅ Base de datos seed copiada exitosamente"
+        ls -lh "$DB_PATH"
     else
         echo "ℹ️  No hay seed database disponible"
         echo "   Umbraco creará una nueva base de datos"
