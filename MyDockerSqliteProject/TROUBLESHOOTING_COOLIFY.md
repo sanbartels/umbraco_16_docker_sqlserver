@@ -80,7 +80,25 @@ Si ves que la BD ya existe y tiene un tamaño diferente a 980K, significa que ha
 
 **Opciones de solución**:
 
-#### Opción 1: Eliminar el volumen en Coolify (DESTRUCTIVO)
+#### Opción 1: Usar variable FORCE_SEED_DB (RECOMENDADO)
+
+✅ **La forma más fácil**: Agregar una variable de entorno temporal en Coolify.
+
+1. En Coolify, ve a tu aplicación
+2. Ve a la sección "Environment Variables"
+3. Agrega una nueva variable:
+   - **Nombre**: `FORCE_SEED_DB`
+   - **Valor**: `true`
+4. Haz un nuevo despliegue
+5. Verifica en los logs que aparezca:
+   ```
+   🔄 FORCE_SEED_DB=true - Sobrescribiendo base de datos...
+   📦 Copiando base de datos seed (forzado)...
+   ✅ Base de datos seed copiada exitosamente (sobrescrita)
+   ```
+6. **IMPORTANTE**: Después del despliegue exitoso, **ELIMINA** la variable `FORCE_SEED_DB` para que no sobrescriba en futuros despliegues
+
+#### Opción 2: Eliminar el volumen en Coolify (DESTRUCTIVO)
 
 ⚠️ **ADVERTENCIA**: Esto eliminará TODOS los datos actuales.
 
@@ -89,49 +107,6 @@ Si ves que la BD ya existe y tiene un tamaño diferente a 980K, significa que ha
 3. Elimina el volumen `umbraco-data`
 4. Haz un nuevo despliegue
 
-#### Opción 2: Forzar sobrescritura de la BD (DESTRUCTIVO)
-
-Modificar `init-db.sh` para SIEMPRE copiar la seed database:
-
-```bash
-# En vez de:
-if [ -f "$DB_PATH" ]; then
-    echo "✅ Base de datos existente encontrada"
-    echo "   Usando base de datos actual"
-else
-    # copiar seed
-fi
-
-# Usar:
-if [ -f "$SEED_DB_PATH" ]; then
-    echo "📦 Copiando base de datos seed (sobrescribiendo)..."
-    cp -f "$SEED_DB_PATH" "$DB_PATH"
-    echo "✅ Base de datos seed copiada exitosamente"
-fi
-```
-
-⚠️ **CUIDADO**: Esto sobrescribirá la BD en CADA despliegue.
-
-#### Opción 3: Variable de entorno para controlar la copia (RECOMENDADO)
-
-Agregar una variable de entorno `FORCE_SEED_DB` que controle si se sobrescribe:
-
-```bash
-# En init-db.sh
-if [ "$FORCE_SEED_DB" = "true" ]; then
-    echo "🔄 FORCE_SEED_DB=true - Sobrescribiendo BD..."
-    cp -f "$SEED_DB_PATH" "$DB_PATH"
-elif [ -f "$DB_PATH" ]; then
-    echo "✅ BD existente - no se sobrescribe"
-else
-    echo "📦 Copiando seed BD (primera vez)..."
-    cp "$SEED_DB_PATH" "$DB_PATH"
-fi
-```
-
-Luego en Coolify, agregar la variable solo cuando necesites resetear:
-- `FORCE_SEED_DB=true` → Sobrescribe la BD
-- Sin la variable o `false` → Respeta la BD existente
 
 ### 🎯 Verificación final
 

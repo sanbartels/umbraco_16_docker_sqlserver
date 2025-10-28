@@ -30,11 +30,23 @@ else
 fi
 
 echo ""
+# Verificar si se debe forzar la copia de la seed database
+if [ "$FORCE_SEED_DB" = "true" ]; then
+    echo "🔄 FORCE_SEED_DB=true - Sobrescribiendo base de datos..."
+    if [ -f "$SEED_DB_PATH" ]; then
+        echo "📦 Copiando base de datos seed (forzado)..."
+        cp -f "$SEED_DB_PATH" "$DB_PATH"
+        echo "✅ Base de datos seed copiada exitosamente (sobrescrita)"
+        ls -lh "$DB_PATH"
+    else
+        echo "❌ No se encontró seed database para copiar"
+    fi
 # Verificar si la base de datos ya existe
-if [ -f "$DB_PATH" ]; then
+elif [ -f "$DB_PATH" ]; then
     echo "✅ Base de datos existente encontrada: $DB_PATH"
     ls -lh "$DB_PATH"
     echo "   Usando base de datos actual (no se sobrescribe)"
+    echo "   💡 Usa FORCE_SEED_DB=true para sobrescribir"
 else
     echo "⚠️  Base de datos no encontrada en: $DB_PATH"
 
