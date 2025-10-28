@@ -3,7 +3,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        entrypoint: ["/app/init-db.sh"]
         expose:
             - 8080
         environment:
