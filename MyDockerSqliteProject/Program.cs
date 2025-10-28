@@ -3,16 +3,19 @@ using Microsoft.AspNetCore.HttpOverrides;
 // ========================================
 // Inicialización de base de datos
 // ========================================
-var dbPath = "/app/umbraco/Data/Umbraco.sqlite.db";
-var seedDbPath = "/app/seed-db/Umbraco.sqlite.db";
+var baseDir = AppContext.BaseDirectory;
+var dbDir = Path.Combine(baseDir, "umbraco", "Data");
+var dbPath = Path.Combine(dbDir, "Umbraco.sqlite.db");
+var seedDbPath = Path.Combine(baseDir, "seed-db", "Umbraco.sqlite.db");
 var forceSeedDb = Environment.GetEnvironmentVariable("FORCE_SEED_DB") == "true";
 
 Console.WriteLine("========================================");
 Console.WriteLine("Inicializando base de datos de Umbraco...");
+Console.WriteLine($"BaseDirectory: {baseDir}");
 Console.WriteLine("========================================");
 
 // Crear directorio si no existe
-Directory.CreateDirectory("/app/umbraco/Data");
+Directory.CreateDirectory(dbDir);
 
 // Verificar si existe seed database
 if (File.Exists(seedDbPath))
